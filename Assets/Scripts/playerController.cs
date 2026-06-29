@@ -60,7 +60,7 @@ public class playerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            print("BANG");
+            //print("BANG");
         }
     }
 }
