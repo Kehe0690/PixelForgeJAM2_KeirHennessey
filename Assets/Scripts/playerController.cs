@@ -63,4 +63,12 @@ public class playerController : MonoBehaviour
             //print("BANG");
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            print("hit by enemy");
+        }
+    }
 }
