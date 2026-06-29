@@ -19,6 +19,8 @@ public class playerController : MonoBehaviour
     public float gunRadius;
     private Transform gunPivot;
 
+    public Transform muzzle;
+
 
     private void Start()
     {
@@ -46,11 +48,11 @@ public class playerController : MonoBehaviour
         float gunAngle = Mathf.Atan2(gunDirection.y, gunDirection.x) * Mathf.Rad2Deg;
         gun.transform.position = (Vector3)rb.position + (Vector3)(gunDirection.normalized * gunRadius);
         gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
-        print(gunAngle);
 
         if(gunAngle > -90 && gunAngle < 90)
         {
             gun.GetComponent<SpriteRenderer>().flipY = false;
+            
         }
         else
         {
