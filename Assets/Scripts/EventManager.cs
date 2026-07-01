@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class EventManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class EventManager : MonoBehaviour
     [SerializeField] private float maxSpawnTime;
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float timeUntilSpawn;
+
+    [SerializeField] private PlayableDirector timeline;
 
     private bool currentlySpawning;
 
@@ -63,6 +66,20 @@ public class EventManager : MonoBehaviour
             Destroy(enemy);
         }
         currentlySpawning = false;
-
+        TriggerEndScene();
     }
+
+    private void TriggerEndScene()
+    {
+        if(timeline != null)
+        {
+            timeline.Play();
+        }
+    }
+
+    public void MoveToNextWave(string sceneName)
+    {
+        print("sceneName");
+    }
+
 }

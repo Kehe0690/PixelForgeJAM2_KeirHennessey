@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8795617641417857991}
   - component: {fileID: 6806017532926865718}
   - component: {fileID: -1789434998710924288}
+  - component: {fileID: 3493998972219940295}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Machinegun
@@ -158,3 +159,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &3493998972219940295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5445884154766346070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6485a2dce979a542925bf4deba33c2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDespawnTime: 10
+  minDespawnTime: 10
+  timeUntilDespawn: 0
