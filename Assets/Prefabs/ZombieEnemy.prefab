@@ -188,5 +188,6 @@ MonoBehaviour:
   dropList:
   - {fileID: 6679171386155271463, guid: 7d37f75b9fbc8f74ca7d3c2e590e1e2e, type: 3}
   - {fileID: 5445884154766346070, guid: 2769e0dab4ad02d458857eefd1a4944e, type: 3}
-  dropRate: 1
+  dropRate: 100
   dropNum: 0
+  HUDControllerScript: {fileID: 0}

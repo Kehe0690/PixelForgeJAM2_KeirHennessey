@@ -14,6 +14,8 @@ public class EventManager : MonoBehaviour
 
     private bool currentlySpawning;
 
+    
+
 
     void Awake()
     {
@@ -42,12 +44,25 @@ public class EventManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if(waveNum == 1)
+        if(waveNum == 1 )
         {
 
             var randomSpawn = Random.Range(0, enemySpawnPoints.Count);
             Instantiate(enemyList[0],enemySpawnPoints[randomSpawn].position,Quaternion.identity);
             SetTimeUntilSpawn();
         }
+    }
+
+
+
+    public void WaveFinished()
+    {
+        GameObject[] enemiesOnScreen = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject enemy in enemiesOnScreen)
+        {
+            Destroy(enemy);
+        }
+        currentlySpawning = false;
+
     }
 }

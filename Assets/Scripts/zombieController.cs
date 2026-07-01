@@ -14,8 +14,11 @@ public class zombieController : MonoBehaviour
     [SerializeField] private float dropRate;
     [SerializeField] private float dropNum;
 
+    public HUDController HUDControllerScript;
+
     void Start()
     {
+        HUDControllerScript = GameObject.FindGameObjectWithTag("HUD").GetComponent<HUDController>();
         playerTarget = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
@@ -51,6 +54,7 @@ public class zombieController : MonoBehaviour
         if(enemyHealth < 1)
         {
             SpawnDrop();
+            HUDControllerScript.SetKillCount();
             Destroy(gameObject);
         }
     }
@@ -58,7 +62,7 @@ public class zombieController : MonoBehaviour
     private void SpawnDrop()
     {
         dropNum = Random.Range(0, dropRate);
-        if(dropNum < 20)
+        if(dropNum < 10)
         {
             Instantiate(dropList[Random.Range(0,dropList.Count)],transform.position, Quaternion.identity);
         }

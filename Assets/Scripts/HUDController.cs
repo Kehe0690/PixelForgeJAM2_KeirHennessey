@@ -16,9 +16,16 @@ public class HUDController : MonoBehaviour
     public GameObject MachinegunImg;
     private int ammoCount;
     public playerController playerControllerScript;
+    public EventManager eventManagerScript;
+
+    public int killEnemyCount = 0;
+    public int maxKillCount;
+
+    public TMP_Text enemyKillCount;
+    public GameObject enemyImg;
     void Start()
     {
-        
+        enemyKillCount.SetText(""+killEnemyCount);
     }
 
     // Update is called once per frame
@@ -82,8 +89,16 @@ public class HUDController : MonoBehaviour
         if (ammoCount <= 0)
         {
             playerControllerScript.NoAmmo();
-        }
+        }  
+    }
 
-        
+    public void SetKillCount()
+    {
+        killEnemyCount++;
+        enemyKillCount.SetText("" + killEnemyCount);
+        if (killEnemyCount >= maxKillCount)
+        {
+            eventManagerScript.WaveFinished();
+        }
     }
 }
