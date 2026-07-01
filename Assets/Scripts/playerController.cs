@@ -22,11 +22,14 @@ public class playerController : MonoBehaviour
     private Vector2 mousePostion;
     private Vector2 gunDirection;
     public UnityEvent signalGunType;
-
     public float gunRadius;
     private Transform gunPivot;
-
     public Transform muzzle;
+
+    public int maxHealth = 10;
+    public int currentHealth;
+
+    public HUDController healthBar;
 
 
     private void Start()
@@ -40,6 +43,10 @@ public class playerController : MonoBehaviour
         gunPivot = rb.transform;
         transform.parent = gunPivot;
         transform.position += Vector3.up * gunRadius;
+
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
     }
 
     private void Update()
@@ -89,7 +96,7 @@ public class playerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            print("hit by enemy");
+            TakeDamage(1);
         }
         
     }
@@ -107,6 +114,7 @@ public class playerController : MonoBehaviour
             shotgun.SetActive(true);
             shotgunEquiped = true;
             signalGunType.Invoke();
+            healthBar.SetShotgunHUD();
             Destroy(collision.gameObject);
             
         }
@@ -120,6 +128,7 @@ public class playerController : MonoBehaviour
             machinegun.SetActive(true);
             machinegunEquiped = true;
             signalGunType.Invoke();
+            healthBar.SetMachinegunHUD();
             Destroy(collision.gameObject);
         }
     }
@@ -138,5 +147,29 @@ public class playerController : MonoBehaviour
         {
             return "Pistol";
         }
+    }
+
+    private void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        
+        if(currentHealth<= 0)
+        {
+            healthBar.ToggleGameOver();
+        }
+    }
+
+    public void NoAmmo()
+    {
+        gun = gunList[0];
+        pistol.SetActive(true);
+        pistolEquiped = true;
+        shotgun.SetActive(false);
+        shotgunEquiped = false;
+        machinegun.SetActive(false);
+        machinegunEquiped = false;
+        healthBar.SetPistolHUD();
+        signalGunType.Invoke();
     }
 }

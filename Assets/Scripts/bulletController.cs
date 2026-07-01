@@ -18,6 +18,8 @@ public class bulletController : MonoBehaviour
 
     public string equipedGun;
 
+    public HUDController ammoCount;
+
     private void Start()
     {
         equipedGun = playerControllerScript.GetEquipedGun();
@@ -57,6 +59,7 @@ public class bulletController : MonoBehaviour
                 firedBullet1.AddForce(pistol.right * bulletSpeed + new Vector3(0f,90f,0f));
                 firedBullet2.AddForce(pistol.right * bulletSpeed);
                 firedBullet3.AddForce(pistol.right * bulletSpeed + new Vector3(0f, -90f, 0f));
+                ammoCount.UseAmmo();
             }
 
         }
@@ -67,6 +70,7 @@ public class bulletController : MonoBehaviour
                 nextShot = Time.time + (fireRate-(float)0.25);
                 var firedBullet = Instantiate(bullet, pistol.position, pistol.rotation);
                 firedBullet.AddForce(pistol.right * bulletSpeed);
+                ammoCount.UseAmmo();
             }
             
         }
