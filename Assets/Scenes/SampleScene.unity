@@ -1146,6 +1146,9 @@ MonoBehaviour:
   pistol: {fileID: 9127376725333163779}
   shotgun: {fileID: 8240457197153536032}
   machinegun: {fileID: 5041735816639942238}
+  signalGunType:
+    m_PersistentCalls:
+      m_Calls: []
   gunRadius: 1
   muzzle: {fileID: 0}
 --- !u!1 &1391662897
@@ -1572,7 +1575,7 @@ GameObject:
   - component: {fileID: 8405943984281428633}
   m_Layer: 0
   m_Name: muzzle
-  m_TagString: Untagged
+  m_TagString: Muzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1742,6 +1745,8 @@ MonoBehaviour:
   pistol: {fileID: 5305784267156003387}
   bullet: {fileID: 6106585388413812540, guid: 721cf4735215055418df4eb20e47860e, type: 3}
   bulletSpeed: 500
+  playerControllerScript: {fileID: 1301772249}
+  equipedGun: 
 --- !u!1 &2882950470111022423
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,7 +1760,7 @@ GameObject:
   - component: {fileID: 4608272587206158752}
   m_Layer: 0
   m_Name: muzzle
-  m_TagString: Untagged
+  m_TagString: Muzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1843,6 +1848,8 @@ MonoBehaviour:
   pistol: {fileID: 413889604290856815}
   bullet: {fileID: 6106585388413812540, guid: 721cf4735215055418df4eb20e47860e, type: 3}
   bulletSpeed: 500
+  playerControllerScript: {fileID: 1301772249}
+  equipedGun: 
 --- !u!1 &5041735816639942238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1911,7 @@ GameObject:
   - component: {fileID: 1957015363317537150}
   m_Layer: 0
   m_Name: muzzle
-  m_TagString: Untagged
+  m_TagString: Muzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2045,6 +2052,8 @@ MonoBehaviour:
   pistol: {fileID: 587477374224874608}
   bullet: {fileID: 6106585388413812540, guid: 721cf4735215055418df4eb20e47860e, type: 3}
   bulletSpeed: 500
+  playerControllerScript: {fileID: 1301772249}
+  equipedGun: 
 --- !u!212 &9112692596463644558
 SpriteRenderer:
   m_ObjectHideFlags: 0

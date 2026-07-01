@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Shotgun
   - Machinegun
+  - Muzzle
   layers:
   - Default
   - TransparentFX

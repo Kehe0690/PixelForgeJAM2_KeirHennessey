@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public class playerController : MonoBehaviour
 {
@@ -16,8 +16,12 @@ public class playerController : MonoBehaviour
     public GameObject pistol;
     public GameObject shotgun;
     public GameObject machinegun;
+    private bool pistolEquiped;
+    private bool shotgunEquiped;
+    private bool machinegunEquiped;
     private Vector2 mousePostion;
     private Vector2 gunDirection;
+    public UnityEvent signalGunType;
 
     public float gunRadius;
     private Transform gunPivot;
@@ -27,6 +31,12 @@ public class playerController : MonoBehaviour
 
     private void Start()
     {
+        signalGunType.AddListener(GameObject.FindGameObjectWithTag("Muzzle").GetComponent<bulletController>().SwapGun);
+
+        pistolEquiped = true;
+        shotgunEquiped = false;
+        machinegunEquiped = false;
+
         gunPivot = rb.transform;
         transform.parent = gunPivot;
         transform.position += Vector3.up * gunRadius;
@@ -37,7 +47,6 @@ public class playerController : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
         GunRotation();
-        print(gun);
     }
 
     private void FixedUpdate()
@@ -92,17 +101,42 @@ public class playerController : MonoBehaviour
         {
             gun = gunList[1];
             pistol.SetActive(false);
+            pistolEquiped = false;
             machinegun.SetActive(false);
+            machinegunEquiped = false;
             shotgun.SetActive(true);
-            print("got shotgun");
+            shotgunEquiped = true;
+            signalGunType.Invoke();
+            Destroy(collision.gameObject);
+            
         }
         else if (collision.gameObject.CompareTag("Machinegun"))
         {
             gun = gunList[2];
             pistol.SetActive(false);
+            pistolEquiped = false;
             shotgun.SetActive(false);
+            shotgunEquiped = false;
             machinegun.SetActive(true);
-            print("got machine gun");
+            machinegunEquiped = true;
+            signalGunType.Invoke();
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public string GetEquipedGun()
+    {
+        if (shotgunEquiped)
+        {
+            return "Shotgun";
+        }
+        else if (machinegunEquiped)
+        {
+            return "MachineGun";
+        }
+        else
+        {
+            return "Pistol";
         }
     }
 }
