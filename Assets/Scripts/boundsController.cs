@@ -7,7 +7,6 @@ public class boundsController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision);
         
         if (collision.gameObject.CompareTag("Player"))
             {

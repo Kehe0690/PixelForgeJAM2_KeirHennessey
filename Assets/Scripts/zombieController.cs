@@ -7,8 +7,12 @@ public class zombieController : MonoBehaviour
 
     public float moveSpeed;
     public int enemyHealth;
+    [SerializeField] private List<GameObject> dropList;
 
     private Transform playerTarget;
+
+    [SerializeField] private float dropRate;
+    [SerializeField] private float dropNum;
 
     void Start()
     {
@@ -46,7 +50,17 @@ public class zombieController : MonoBehaviour
 
         if(enemyHealth < 1)
         {
+            SpawnDrop();
             Destroy(gameObject);
+        }
+    }
+
+    private void SpawnDrop()
+    {
+        dropNum = Random.Range(0, dropRate);
+        if(dropNum < 20)
+        {
+            Instantiate(dropList[Random.Range(0,dropList.Count)],transform.position, Quaternion.identity);
         }
     }
 }

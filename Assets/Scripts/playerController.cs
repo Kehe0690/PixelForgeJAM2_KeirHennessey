@@ -11,8 +11,11 @@ public class playerController : MonoBehaviour
 
     public Rigidbody2D rb;
 
-
-    [SerializeField] private GameObject gun;
+    [SerializeField] List<GameObject> gunList;
+    public GameObject gun;
+    public GameObject pistol;
+    public GameObject shotgun;
+    public GameObject machinegun;
     private Vector2 mousePostion;
     private Vector2 gunDirection;
 
@@ -34,6 +37,7 @@ public class playerController : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
         GunRotation();
+        print(gun);
     }
 
     private void FixedUpdate()
@@ -46,21 +50,29 @@ public class playerController : MonoBehaviour
         Vector3 moustPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 gunDirection = moustPosition - (Vector3)rb.position;
         float gunAngle = Mathf.Atan2(gunDirection.y, gunDirection.x) * Mathf.Rad2Deg;
-        gun.transform.position = (Vector3)rb.position + (Vector3)(gunDirection.normalized * gunRadius);
-        gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
+        if(gun != null)
+        {
+            gun.transform.position = (Vector3)rb.position + (Vector3)(gunDirection.normalized * gunRadius);
+            gun.transform.rotation = Quaternion.AngleAxis(gunAngle, Vector3.forward);
+        }
+        
 
         if(gunAngle > -90 && gunAngle < 90)
         {
-            gun.GetComponent<SpriteRenderer>().flipY = false;
+            if(gun != null)
+            {
+                gun.GetComponent<SpriteRenderer>().flipY = false;
+            }
+            
             
         }
         else
         {
-            gun.GetComponent<SpriteRenderer>().flipY = true;
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            //print("BANG");
+            if (gun != null)
+            {
+                gun.GetComponent<SpriteRenderer>().flipY = true;
+            }
+            
         }
     }
 
@@ -69,6 +81,28 @@ public class playerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             print("hit by enemy");
+        }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.CompareTag("Shotgun"))
+        {
+            gun = gunList[1];
+            pistol.SetActive(false);
+            machinegun.SetActive(false);
+            shotgun.SetActive(true);
+            print("got shotgun");
+        }
+        else if (collision.gameObject.CompareTag("Machinegun"))
+        {
+            gun = gunList[2];
+            pistol.SetActive(false);
+            shotgun.SetActive(false);
+            machinegun.SetActive(true);
+            print("got machine gun");
         }
     }
 }
